@@ -2,16 +2,32 @@
   "name": "progate-hakkason",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "node ./server/src/server.js"
   },
   "dependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "@lexical/react": "^0.12.5",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.68",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.17",
+    "@types/ws": "^8.5.10",
+    "lexical": "^0.12.5",
+    "typescript": "~5.7.2",
+    "web-vitals": "^2.1.4",
+    "yjs": "^13.6.9",
+    "y-indexeddb": "^9.0.12",
+    "y-websocket": "^1.5.0",
+    "y-redis": "^1.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
