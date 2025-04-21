@@ -1,9 +1,5 @@
 function App() {
-	return <div className="font-bold">
-		
-		f
-		asf
-		aftest</div>;
+	return <div className="font-bold">test</div>;
 }
 
 export default App;
