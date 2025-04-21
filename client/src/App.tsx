@@ -1,7 +1,5 @@
-import "./App.css";
-
 function App() {
-	return <>test</>;
+	return <div className="font-bold">test</div>;
 }
 
 export default App;
