@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# 環境変数ファイルは絶対に公開しないのだ！
+.env
+.env.*
