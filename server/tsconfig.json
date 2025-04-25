@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    /* Visit https://aka.ms/tsconfig to read more about this file */
+
+    /* Language and Environment */
+    "target": "es2016" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+
+    /* Modules */
+    "module": "commonjs" /* Specify what module code is generated. */,
+    "rootDir": "./src" /* ソースファイルのルートフォルダを指定するのだ */,
+    "moduleResolution": "node" /* TypeScriptがモジュールを解決する方法を指定するのだ */,
+    "resolveJsonModule": true /* .jsonファイルのインポートを可能にするのだ */,
+
+    /* Emit */
+    "outDir": "./dist" /* コンパイル後のファイルの出力先を指定するのだ */,
+    "sourceMap": true /* ソースマップを生成するのだ（デバッグに便利なのだ） */,
+
+    /* Interop Constraints */
+    "esModuleInterop": true /* CommonJSモジュールのインポートをサポートするのだ */,
+    "forceConsistentCasingInFileNames": true /* ファイル名の大文字小文字を正確に扱うのだ */,
+
+    /* Type Checking */
+    "strict": true /* 厳格な型チェックを有効にするのだ */,
+
+    /* Completeness */
+    "skipLibCheck": true /* .d.tsファイルの型チェックをスキップするのだ */
+  },
+  "include": ["src/**/*"] /* コンパイル対象のファイルを指定するのだ */,
+  "exclude": [
+    "node_modules",
+    "dist"
+  ] /* コンパイル対象から除外するものを指定するのだ */
+}
