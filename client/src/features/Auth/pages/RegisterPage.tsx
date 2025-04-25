@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { RegisterValidation } from "../utils/validationSchema";
 import githubIcon from "../../../assets/github-mark.svg";
+import { RegisterValidation } from "../utils/validationSchema";
 
 interface RegisterForm {
 	name: string;
