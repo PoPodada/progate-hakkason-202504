@@ -103,7 +103,7 @@ const TiptapEditor = () => {
 		return null;
 	}
 	return (
-		<div className="w-2/3 mt-10 mx-auto border-gray-500 border-2">
+		<div className=" mt-10 mx-auto border-gray-500 border-2">
 			<RichEditorToolbar editor={editor} />
 			<div className="p-3 overflow-y-scroll h-[500px] overflow-hidden mt-3">
 				<EditorContent editor={editor} />
