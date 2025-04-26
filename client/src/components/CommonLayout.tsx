@@ -5,7 +5,7 @@ const CommonLayout = () => {
 	return (
 		<div className="flex flex-col min-h-screen">
 			<Header />
-			<main className="flex-grow">
+			<main className="flex-grow bg-neutral-50">
 				<Outlet />
 			</main>
 		</div>
