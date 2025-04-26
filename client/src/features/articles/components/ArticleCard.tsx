@@ -2,23 +2,21 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "react-router";
 import type { Articles } from "../hooks/useFetchArticles";
 
-const TopazCard = ({ id, title, category, imageUrl, author }: Articles) => {
+const TopazCard = ({ id, title, emoji, author }: Articles) => {
 	return (
 		<Link
 			key={id}
-			to={id}
+			to={`/projects/${id}`}
 			className="w-full max-w-xs bg-white rounded-lg shadow-md overflow-hidden flex flex-col"
 		>
-			<div className="h-48 w-full overflow-hidden">
-				<img
-					src={imageUrl}
-					alt="プロジェクト画像"
-					className="w-full h-full object-cover"
-				/>
+			<div className="h-42 w-full">
+				<div className="h-full text-center text-5xl rounded-t-lg bg-indigo-50 flex items-center justify-center">
+					{emoji}
+				</div>
 			</div>
 			<div className="px-3 pt-3 pb-4">
 				<span className="inline-block bg-cyan-500 text-white text-xs px-2 py-0.5 rounded-full mb-2">
-					{category}
+					プロジェクト
 				</span>
 				<h3 className="text-base font-bold text-gray-800 text-center truncate">
 					{title}
@@ -28,9 +26,7 @@ const TopazCard = ({ id, title, category, imageUrl, author }: Articles) => {
 						<AvatarImage alt="icon-url" />
 						<AvatarFallback>CN</AvatarFallback>
 					</Avatar>
-					<span className="ml-2 text-sm text-gray-500 truncate">
-						{author.name}
-					</span>
+					<span className="ml-2 text-sm text-gray-500 truncate">{author}</span>
 				</div>
 			</div>
 		</Link>

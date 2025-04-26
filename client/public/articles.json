@@ -2,31 +2,22 @@
   {
     "id": "1",
     "title": "AIで画像分類するやつ",
-    "category": "機械学習",
-    "imageUrl": "image-url",
-    "author": {
-      "name": "tanaka",
-      "avatarUrl": "avatar-url"
-    }
+    "label": ["Python", "TensorFlow", "機械学習"],
+    "emoji": "🥺",
+    "author": "tanaka"
   },
   {
     "id": "2",
     "title": "Next.js + Firebaseで掲示板",
-    "category": "Webアプリ",
-    "imageUrl": "image-url",
-    "author": {
-      "name": "suzuki",
-      "avatarUrl": "avatar-url"
-    }
+    "label": ["Next.js", "Firebase", "TypeScript"],
+    "emoji": "🚀",
+    "author": "suzuki"
   },
   {
     "id": "3",
     "title": "Twitter風クローンアプリ",
-    "category": "SNS",
-    "imageUrl": "image-url",
-    "author": {
-      "name": "yamada",
-      "avatarUrl": "avatar-url"
-    }
+    "label": ["React", "Node.js", "SNS"],
+    "emoji": "🌳",
+    "author": "yamada"
   }
 ]

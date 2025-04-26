@@ -4,12 +4,9 @@ import { useEffect, useState } from "react";
 export interface Articles {
 	id: string;
 	title: string;
-	category: string;
-	imageUrl: string;
-	author: {
-		name: string;
-		avatarUrl: string;
-	};
+	label: string[];
+	emoji: string;
+	author: string;
 }
 
 export const useFetchArticles = () => {
