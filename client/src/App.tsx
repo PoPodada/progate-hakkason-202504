@@ -1,12 +1,40 @@
 import { type User, onAuthStateChanged } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
 import { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router";
+import { create } from "zustand";
 import { auth, db } from "./firebase";
+
+type AuthStore = {
+	user: User | null;
+	loading: boolean;
+	setUser: (user: User | null) => void;
+	setLoading: (loading: boolean) => void;
+};
+
+export const useAuthStore = create<AuthStore>((set) => ({
+	user: null,
+	loading: true,
+	setUser: (user) => set({ user }),
+	setLoading: (loading) => set({ loading }),
+}));
 
 function App() {
 	// 認証状態を保持するための状態変数なのだ！
-	const [user, setUser] = useState<User | null>(null);
-	const [loading, setLoading] = useState(true);
+	// const [user, setUser] = useState<User | null>(null);
+	// const [loading, setLoading] = useState(true);
+	const { setUser, setLoading, user, loading } = useAuthStore();
+	console.log("user", user?.displayName);
+
+	const handleLogout = async () => {
+		try {
+			await signOut(auth);
+			console.log("ログアウト成功なのだ！🍵");
+		} catch (error) {
+			console.error("ログアウトに失敗したのだ...😭", error);
+		}
+	};
 
 	// Firebase接続テスト関数をuseCallbackでメモ化するのだ！
 	const testFirebaseConnection = useCallback(async () => {
@@ -68,6 +96,15 @@ function App() {
 					<p>ログインすると表示が変わるのだ！</p>
 				</div>
 			)}
+			<Link to="/1/edit">/1/edit</Link>
+			<Link to="/2/edit">/2/edit</Link>
+			<button
+				onClick={handleLogout}
+				className="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors"
+				type="button">
+
+				ログアウトするのだ！
+			</button>
 		</div>
 	);
 }

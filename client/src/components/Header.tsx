@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { Link } from "react-router";
 
 const Header = () => {
 	const [modalOpen, setModalOpen] = useState(false);
@@ -12,7 +13,7 @@ const Header = () => {
 	return (
 		<header className="bg-white shadow">
 			<div className="container mx-auto px-4 py-4 flex items-center justify-between">
-				<h1 className="font-bold text-xl text-gray-800">Logo</h1>
+				<h1 className="font-bold text-xl text-gray-800"><Link to="/">Logo</Link></h1>
 				<div className="flex ">
 					<Button
 						variant={"default"}

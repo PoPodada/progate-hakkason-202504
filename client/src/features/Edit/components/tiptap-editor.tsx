@@ -6,31 +6,13 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import RichEditorToolbar from "./rich-editor-toolbar";
 import "@/styles/editor.scss";
+import { useAuthStore } from "@/App";
 import Collaboration from "@tiptap/extension-collaboration";
 import CollaborationCursor from "@tiptap/extension-collaboration-cursor";
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router";
 import { WebsocketProvider } from "y-websocket";
 import * as Y from "yjs";
-
-const fetchUser = async (id: string) => {
-	// 本来はAPI呼び出しになる部分
-	const mockUsers = [
-		{
-			id: "1",
-			name: "User 1",
-		},
-		{
-			id: "2",
-			name: "User 2",
-		},
-		{
-			id: "3",
-			name: "User 3",
-		},
-	];
-	return mockUsers[0] || { name: "Anonymous" };
-};
 
 // ユニークで見分けやすい10色
 const colors = [
@@ -47,41 +29,28 @@ const colors = [
 ];
 
 const TiptapEditor = () => {
+	const { user } = useAuthStore();
 	const { projectId } = useParams<{ projectId: string }>();
-	const [user, setUser] = useState<{ name: string }>({ name: "loading..." });
 	const [provider, setProvider] = useState<WebsocketProvider | null>(null);
 	const ydoc = useMemo(() => new Y.Doc(), []);
-
-	
-	useEffect(() => {
-		const loadUser = async () => {
-			try {
-				const userInfo = await fetchUser("1");
-				setUser(userInfo);
-			} catch (error) {
-				console.error("ユーザー情報の取得に失敗したのだ...", error);
-				setUser({ name: "Anonymous" });
-			}
-		};
-
-		loadUser();
-	}, []);
 	console.log("user", user);
-	console.log("projectId", projectId);
-	console.log(provider);
+
+	useEffect(() => {
+		console.log("TiptapEditor: user state changed", {
+			displayName: user?.displayName,
+			email: user?.email,
+			uid: user?.uid,
+		});
+	}, [user]);
 
 	useEffect(() => {
 		if (!projectId) return;
 		const newProvider = new WebsocketProvider(
-			"ws://127.0.0:1234",
+			"ws://localhost:3000",
 			projectId, //roomname
 			ydoc,
 		);
 
-		// 接続状態をログ出力するのだ
-		newProvider.on("status", (event: { status: string }) => {
-			console.log("connection status", event.status);
-		});
 
 		setProvider(newProvider);
 
@@ -89,42 +58,47 @@ const TiptapEditor = () => {
 			newProvider.disconnect();
 		};
 	}, [projectId, ydoc]);
-	const editor = useEditor({
-		extensions: [
-			StarterKit.configure({
-				history: false,
-			}),
-			TaskItem.configure({
-				nested: true,
-			}),
-			TaskList,
-			Link.configure({
-				openOnClick: true,
-			}),
-			Placeholder.configure({
-				placeholder: "Write something …",
-			}),
-			Collaboration.configure({ document: ydoc }),
-			...(provider && user.name !== "loading..." 
-				? [
-					CollaborationCursor.configure({
-						provider,
-						user: {
-							name: user.name,
-							color: colors[Math.floor(Math.random() * colors.length)], // ランダムな色を使うのだ！
-						},
-					}),
-				] 
-				: []
-			),
-		],
-		content: "<p>Hello World! 🌍️</p>",
-		editorProps: {
-			attributes: {
-				class: "prose prose-base m-5 focus:outline-none",
+	const editor = useEditor(
+		{
+			extensions: [
+				StarterKit.configure({
+					history: false,
+				}),
+				TaskItem.configure({
+					nested: true,
+				}),
+				TaskList,
+				Link.configure({
+					openOnClick: true,
+				}),
+				Placeholder.configure({
+					placeholder: "Write something …",
+				}),
+				Collaboration.configure({ document: ydoc }),
+				...(provider
+					? [
+							CollaborationCursor.configure({
+								provider,
+								user: {
+									name:
+										user?.displayName === null
+											? "Anonymous"
+											: user?.displayName,
+									color: colors[Math.floor(Math.random() * colors.length)], // ランダムな色を使うのだ！
+								},
+							}),
+						]
+					: []),
+			],
+			content: "<p>Hello World! 🌍️</p>",
+			editorProps: {
+				attributes: {
+					class: "prose prose-base m-5 focus:outline-none",
+				},
 			},
 		},
-	},[provider, user]);
+		[provider, user],
+	);
 
 	if (!editor || !provider) {
 		return null;
