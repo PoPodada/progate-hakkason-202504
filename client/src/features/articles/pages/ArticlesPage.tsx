@@ -15,11 +15,10 @@ export default function Articles() {
 				最新のプロジェクト
 			</h2>
 			<div className="flex justify-center mb-6 mt-2">
-				<span className="block h-1 mb-6 w-16 bg-cyan-500 rounded-full"></span>
+				<span className="block h-1 mb-6 w-16 bg-cyan-500 rounded-full" />
 			</div>
 
 			<div className="max-w-screen-lg mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
-
 				{articles.map((article) => (
 					<ArticleCard key={article.id} {...article} />
 				))}

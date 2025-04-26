@@ -1,6 +1,6 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "react-router";
 import type { Articles } from "../hooks/useFetchArticles";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const TopazCard = ({ id, title, category, imageUrl, author }: Articles) => {
 	return (
