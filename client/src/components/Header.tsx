@@ -11,7 +11,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className="bg-white shadow">
+		<header className="bg-white shadow z-10">
 			<div className="container mx-auto px-4 py-4 flex items-center justify-between">
 				<h1 className="font-bold text-xl text-gray-800">
 					<Link to="/">Logo</Link>
@@ -19,7 +19,7 @@ const Header = () => {
 				<div className="flex ">
 					<Button
 						variant={"default"}
-						className="mr-4"
+						className="mr-4 bg-cyan-500 hover:bg-cyan-600"
 						onClick={() => setModalOpen(true)}
 					>
 						投稿

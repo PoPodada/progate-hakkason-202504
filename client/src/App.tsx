@@ -4,6 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router";
 import { create } from "zustand";
+import Articles from "./features/articles/pages/ArticlesPage";
 import { auth, db } from "./firebase";
 
 type AuthStore = {
@@ -76,37 +77,7 @@ function App() {
 		testFirebaseConnection();
 	}, [testFirebaseConnection]); // 依存配列にtestFirebaseConnectionを追加するのだ！
 
-	// ロード中は読み込み中の表示をするのだ
-	if (loading) {
-		return <div className="text-center py-4">認証状態を確認中なのだ...</div>;
-	}
-
-	return (
-		<div className="p-4">
-			<h1 className="text-xl font-bold mb-4">Firebase認証テストなのだ！</h1>
-
-			{user ? (
-				<div className="bg-green-100 p-4 rounded">
-					<p className="font-medium">ログイン中なのだ！🍡</p>
-					<p>メールアドレス: {user.email}</p>
-				</div>
-			) : (
-				<div className="bg-yellow-100 p-4 rounded">
-					<p>ログインしていないのだ！🌱</p>
-					<p>ログインすると表示が変わるのだ！</p>
-				</div>
-			)}
-			<Link to="projects/1/edit">/1/edit</Link>
-			<Link to="projects/2/edit">/2/edit</Link>
-			<button
-				onClick={handleLogout}
-				className="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors"
-				type="button"
-			>
-				ログアウトするのだ！
-			</button>
-		</div>
-	);
+	return <Articles />;
 }
 
 export default App;
