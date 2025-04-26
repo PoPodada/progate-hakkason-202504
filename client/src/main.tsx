@@ -6,7 +6,6 @@ import App from "./App.tsx";
 import CommonLayout from "./components/CommonLayout.tsx";
 import Login from "./features/Auth/pages/LoginPage.tsx";
 import Register from "./features/Auth/pages/RegisterPage.tsx";
-import Articles from "./features/articles/pages/ArticlesPage.tsx";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
@@ -19,7 +18,6 @@ createRoot(rootElement).render(
 					<Route index element={<App />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/signup" element={<Register />} />
-					<Route path="/articles" element={<Articles />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

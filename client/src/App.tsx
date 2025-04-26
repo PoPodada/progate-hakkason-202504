@@ -1,5 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useCallback, useEffect } from "react";
+import Articles from "./features/articles/pages/ArticlesPage";
 import { db } from "./firebase";
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
 		testFirebaseConnection();
 	}, [testFirebaseConnection]); // 依存配列にtestFirebaseConnectionを追加するのだ！
 
-	return <div className="font-bold">test</div>;
+	return <Articles />;
 }
 
 export default App;
