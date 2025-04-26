@@ -51,7 +51,6 @@ const TiptapEditor = () => {
 			ydoc,
 		);
 
-
 		setProvider(newProvider);
 
 		return () => {

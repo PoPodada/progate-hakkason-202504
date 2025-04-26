@@ -13,7 +13,9 @@ const Header = () => {
 	return (
 		<header className="bg-white shadow">
 			<div className="container mx-auto px-4 py-4 flex items-center justify-between">
-				<h1 className="font-bold text-xl text-gray-800"><Link to="/">Logo</Link></h1>
+				<h1 className="font-bold text-xl text-gray-800">
+					<Link to="/">Logo</Link>
+				</h1>
 				<div className="flex ">
 					<Button
 						variant={"default"}
