@@ -5,6 +5,7 @@ import { LoginValidation } from "../utils/validationSchema";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 interface LoginForm {
   email: string;
@@ -14,6 +15,7 @@ interface LoginForm {
 function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate(); // ページ遷移用のフックを追加するのだ🌱
 
   const {
     register,
@@ -38,6 +40,9 @@ function Login() {
       );
 
       console.log("ログイン成功なのだ！", userCredential.user);
+
+      // ログイン成功したらホームページに遷移するのだ🍡
+      navigate("/");
     } catch (err) {
       // エラーハンドリングなのだ💦
       console.error("ログインエラーなのだ", err);

@@ -5,6 +5,7 @@ import { RegisterValidation } from "../utils/validationSchema";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 interface RegisterForm {
   name: string;
@@ -16,6 +17,7 @@ interface RegisterForm {
 function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate(); // ページ遷移用のフックを追加するのだ🌱
 
   const {
     register,
@@ -40,6 +42,9 @@ function Register() {
       );
 
       console.log("ユーザー登録完了なのだ！", userCredential.user);
+
+      // 登録成功したらホームページに遷移するのだ🍡
+      navigate("/");
     } catch (err) {
       // エラーハンドリングなのだ💦
       console.error("登録エラーなのだ", err);
