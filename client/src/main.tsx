@@ -19,7 +19,7 @@ createRoot(rootElement).render(
 					<Route index element={<App />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/signup" element={<Register />} />
-					<Route path="/:projectId/edit" element={<Edit />} />
+					<Route path="projects/:projectId/edit" element={<Edit />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

@@ -96,8 +96,8 @@ function App() {
 					<p>ログインすると表示が変わるのだ！</p>
 				</div>
 			)}
-			<Link to="/1/edit">/1/edit</Link>
-			<Link to="/2/edit">/2/edit</Link>
+			<Link to="projects/1/edit">/1/edit</Link>
+			<Link to="projects/2/edit">/2/edit</Link>
 			<button
 				onClick={handleLogout}
 				className="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors"
