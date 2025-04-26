@@ -2,10 +2,9 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { db } from "./firebase";
-import * as Y from 'yjs';
 import http from 'http';
+import { handleWebSocketConnection } from "./controller/websocket";
 const WebSocket = require("ws");
-const { setupWSConnection } = require('y-websocket/bin/utils');
 
 
 // 環境変数を読み込むのだ
@@ -37,14 +36,10 @@ app.get("/", (req, res) => {
   res.json({ message: "ずんだもんのAPI サーバーなのだ！🍡" });
 });
 
+// WebSocket接続の処理
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
-wss.on('connection', (ws: any, req: any) => {
-  setupWSConnection(ws, req, { 
-    gcEnabled: true,
-  });
-});
-
+wss.on("connection", handleWebSocketConnection);
 
 server.listen(port, () => {
   console.log(`サーバーが起動したのだ！ポート: ${port} 🍵`);
