@@ -1,7 +1,7 @@
+import { type User, onAuthStateChanged } from "firebase/auth";
 import { collection, getDocs } from "firebase/firestore";
-import { onAuthStateChanged, User } from "firebase/auth";
 import { useCallback, useEffect, useState } from "react";
-import { db, auth } from "./firebase";
+import { auth, db } from "./firebase";
 
 function App() {
 	// 認証状態を保持するための状態変数なのだ！
@@ -30,11 +30,11 @@ function App() {
 		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
 			setUser(currentUser); // ログインしていればユーザー情報、していなければnullが入るのだ
 			setLoading(false); // 読み込み完了なのだ
-			
+
 			console.log(
-				currentUser 
-					? `ログイン中のユーザー: ${currentUser.email}なのだ！` 
-					: "ログインしていないのだ！"
+				currentUser
+					? `ログイン中のユーザー: ${currentUser.email}なのだ！`
+					: "ログインしていないのだ！",
 			);
 		});
 
@@ -56,7 +56,7 @@ function App() {
 	return (
 		<div className="p-4">
 			<h1 className="text-xl font-bold mb-4">Firebase認証テストなのだ！</h1>
-			
+
 			{user ? (
 				<div className="bg-green-100 p-4 rounded">
 					<p className="font-medium">ログイン中なのだ！🍡</p>
