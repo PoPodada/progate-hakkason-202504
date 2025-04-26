@@ -1,6 +1,6 @@
 // controllers/websocket.ts
 import * as url from 'url';
-import { WebSocket } from 'ws';
+import type { WebSocket } from 'ws';
 const { setupWSConnection } = require('y-websocket/bin/utils');
 
 const rooms = new Map();
@@ -44,6 +44,16 @@ export const handleWebSocketConnection = (ws: WebSocket, req: { url: string }) =
   setupWSConnection(ws, req, {
     gcEnabled: true,
     roomName: roomName,
+    handlers: {
+      onConnect: () => {
+        console.log(`Y.js接続確立: ${roomName}`);
+      },
+      onSynced: () => {
+        console.log(`Y.js同期完了: ${roomName}`);
+      }
+    }
   });
+
+
 };
 

@@ -26,6 +26,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "y-websocket": [
+        "node_modules/y-websocket/dist/src/y-websocket.d.ts"
       ]
     }
   },
