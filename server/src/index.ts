@@ -2,6 +2,11 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { db } from "./firebase";
+import * as Y from 'yjs';
+import http from 'http';
+const WebSocket = require("ws");
+const { setupWSConnection } = require('y-websocket/bin/utils');
+
 
 // 環境変数を読み込むのだ
 dotenv.config();
@@ -32,8 +37,16 @@ app.get("/", (req, res) => {
   res.json({ message: "ずんだもんのAPI サーバーなのだ！🍡" });
 });
 
-// サーバーを起動するのだ
-app.listen(port, () => {
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+wss.on('connection', (ws: any, req: any) => {
+  setupWSConnection(ws, req, { 
+    gcEnabled: true,
+  });
+});
+
+
+server.listen(port, () => {
   console.log(`サーバーが起動したのだ！ポート: ${port} 🍵`);
   testFirebaseConnection();
 });
