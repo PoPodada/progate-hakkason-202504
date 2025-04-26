@@ -1,6 +1,10 @@
 import { auth } from "@/firebase";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+	GithubAuthProvider,
+	createUserWithEmailAndPassword,
+	signInWithPopup,
+} from "firebase/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -52,6 +56,38 @@ function Register() {
 				setError(err.message);
 			} else {
 				setError("登録中にエラーが発生したのだ...");
+			}
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	// GitHubで登録する機能を追加するのだ🍡
+	const handleGitHubSignup = async () => {
+		try {
+			setIsLoading(true);
+			setError(null);
+
+			// GitHubプロバイダーを作成するのだ🌱
+			const provider = new GithubAuthProvider();
+
+			// GitHubで認証するのだ🍵
+			const result = await signInWithPopup(auth, provider);
+
+			// GitHubの認証情報を取得するのだ
+			const credential = GithubAuthProvider.credentialFromResult(result);
+			const token = credential?.accessToken;
+
+			console.log("GitHub認証成功なのだ！", result.user);
+
+			// 登録成功したらホームページに遷移するのだ
+			navigate("/");
+		} catch (err) {
+			console.error("GitHub登録エラーなのだ", err);
+			if (err instanceof Error) {
+				setError(err.message);
+			} else {
+				setError("GitHub認証中にエラーが発生したのだ...");
 			}
 		} finally {
 			setIsLoading(false);
@@ -157,6 +193,7 @@ function Register() {
 						type="button"
 						className="w-full border border-gray-300 hover:bg-gray-100 flex items-center justify-center gap-2 px-3 py-2 rounded-[8px] transition-colors disabled:opacity-50 disabled:pointer-events-none"
 						disabled={isLoading}
+						onClick={handleGitHubSignup} // GitHub認証処理を追加するのだ🌿
 					>
 						<img src={githubIcon} alt="GitHub Icon" className="w-6 h-6" />{" "}
 						<span className="text-sm text-gray-700 font-medium">
