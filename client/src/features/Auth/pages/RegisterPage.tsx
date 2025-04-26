@@ -1,6 +1,11 @@
 import { auth, db } from "@/firebase";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { GithubAuthProvider, createUserWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
+import {
+	GithubAuthProvider,
+	createUserWithEmailAndPassword,
+	signInWithPopup,
+	updateProfile,
+} from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -44,7 +49,7 @@ function Register() {
 
 			// ユーザープロフィールを更新するのだ🌱
 			await updateProfile(userCredential.user, {
-				displayName: data.name
+				displayName: data.name,
 			});
 
 			// Firestoreにユーザー情報を保存するのだ🍡
@@ -78,17 +83,17 @@ function Register() {
 		try {
 			setIsLoading(true);
 			setError(null);
-			
+
 			// GitHubプロバイダーを作成するのだ🌱
 			const provider = new GithubAuthProvider();
-			
+
 			// GitHubで認証するのだ🍵
 			const result = await signInWithPopup(auth, provider);
-			
+
 			// GitHubの認証情報を取得するのだ
 			const credential = GithubAuthProvider.credentialFromResult(result);
 			const token = credential?.accessToken;
-			
+
 			// Firestoreにユーザー情報を保存するのだ🍡
 			await setDoc(doc(db, "users", result.user.uid), {
 				uid: result.user.uid,
@@ -98,12 +103,11 @@ function Register() {
 				provider: "github",
 				createdAt: new Date(),
 			});
-			
+
 			console.log("GitHub認証成功なのだ！", result.user);
-			
+
 			// 登録成功したらホームページに遷移するのだ
 			navigate("/");
-			
 		} catch (err) {
 			console.error("GitHub登録エラーなのだ", err);
 			if (err instanceof Error) {
