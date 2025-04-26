@@ -58,6 +58,7 @@ function Register() {
 				name: data.name,
 				email: data.email,
 				createdAt: new Date(),
+				provider: "password",
 				// プロフィール画像やその他の情報も追加できるのだ！
 			});
 
