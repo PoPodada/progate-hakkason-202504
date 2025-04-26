@@ -1,10 +1,12 @@
-import { auth } from "@/firebase";
+import { auth, db } from "@/firebase";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	GithubAuthProvider,
 	createUserWithEmailAndPassword,
 	signInWithPopup,
+	updateProfile,
 } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -45,6 +47,21 @@ function Register() {
 				data.password,
 			);
 
+			// ユーザープロフィールを更新するのだ🌱
+			await updateProfile(userCredential.user, {
+				displayName: data.name,
+			});
+
+			// Firestoreにユーザー情報を保存するのだ🍡
+			await setDoc(doc(db, "users", userCredential.user.uid), {
+				uid: userCredential.user.uid,
+				name: data.name,
+				email: data.email,
+				createdAt: new Date(),
+				provider: "password",
+				// プロフィール画像やその他の情報も追加できるのだ！
+			});
+
 			console.log("ユーザー登録完了なのだ！", userCredential.user);
 
 			// 登録成功したらホームページに遷移するのだ🍡
@@ -77,6 +94,16 @@ function Register() {
 			// GitHubの認証情報を取得するのだ
 			const credential = GithubAuthProvider.credentialFromResult(result);
 			const token = credential?.accessToken;
+
+			// Firestoreにユーザー情報を保存するのだ🍡
+			await setDoc(doc(db, "users", result.user.uid), {
+				uid: result.user.uid,
+				name: result.user.displayName || "GitHub User",
+				email: result.user.email,
+				photoURL: result.user.photoURL,
+				provider: "github",
+				createdAt: new Date(),
+			});
 
 			console.log("GitHub認証成功なのだ！", result.user);
 
