@@ -100,8 +100,10 @@ const Edit = () => {
 						id="abstract"
 					/>
 				</div>
+				<div className="space-y-2">
+					<TiptapEditor />
+				</div>
 			</div>
-			<TiptapEditor />
 		</div>
 	);
 };
