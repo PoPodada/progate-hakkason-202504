@@ -1,0 +1,24 @@
+{
+  "id": "1",
+  "title": "コードねこ",
+  "subtitle": "プログラミング学習中の癒やしに！デスクトップで遊べるバーチャルねこ",
+  "label": ["Electron", "TypeScript", "React"],
+  "emoji": "🐱",
+  "githubUrl": "https://github.com/example/code-neko",
+  "deployUrl": "https://codeneko.example.com",
+  "authors": [
+    {
+      "userId": "1",
+      "name": "nekoman"
+    },
+    {
+      "userId": "2",
+      "name": "catcoder"
+    },
+    {
+      "userId": "3",
+      "name": "purrgrammer"
+    }
+  ],
+  "projectDetail": "# プロジェクトの概要 🐱\n\nコードねこは、プログラミング作業中のデスクトップに住み着く癒やし系バーチャルペットアプリです。\n\n# 主な機能 ✨\n\n- **作業時間モニタリング**: 長時間の作業を検知して適度な休憩を促します\n- **励まし機能**: コーディング中に可愛い鳴き声で励ましてくれます\n- **成長システム**: GitHubのコミット数に応じてねこが成長します\n\n## 技術スタック 🛠️\n\n- **フロントエンド**: React + TypeScript\n- **デスクトップアプリ化**: Electron\n- **その他**: \n  - GitHub API（コミット数取得）\n  - Electron Store（データ永続化）\n\n## 開発の動機 💭\n\nプログラミング学習中の孤独感や疲労を和らげるため、デスクトップに常駐する癒やしのお供を作りたいと考えました。"
+}

@@ -8,6 +8,7 @@ import CommonLayout from "./components/CommonLayout.tsx";
 import Login from "./features/Auth/pages/LoginPage.tsx";
 import Register from "./features/Auth/pages/RegisterPage.tsx";
 import Edit from "./features/Edit/Edit.tsx";
+import ArticleDetail from "./features/articles/pages/ArticleDetailPage.tsx";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) throw new Error("Root element not found");
@@ -21,6 +22,7 @@ createRoot(rootElement).render(
 					<Route path="/login" element={<Login />} />
 					<Route path="/signup" element={<Register />} />
 					<Route path="/projects/:projectId/edit" element={<Edit />} />
+					<Route path="/projects/:projectId" element={<ArticleDetail />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 				</Route>
 			</Routes>
