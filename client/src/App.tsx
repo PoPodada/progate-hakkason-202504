@@ -1,5 +1,5 @@
 import { type User, onAuthStateChanged } from "firebase/auth";
-import { signOut } from "firebase/auth";
+
 import { collection, getDocs } from "firebase/firestore";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router";
@@ -28,14 +28,7 @@ function App() {
 	const { setUser, setLoading, user, loading } = useAuthStore();
 	console.log("user", user?.displayName);
 
-	const handleLogout = async () => {
-		try {
-			await signOut(auth);
-			console.log("ログアウト成功なのだ！🍵");
-		} catch (error) {
-			console.error("ログアウトに失敗したのだ...😭", error);
-		}
-	};
+	
 
 	// Firebase接続テスト関数をuseCallbackでメモ化するのだ！
 	const testFirebaseConnection = useCallback(async () => {
