@@ -1,18 +1,41 @@
+import { useAuthStore } from "@/App";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { auth } from "@/firebase";
+import { signOut } from "firebase/auth";
+import { FileText, LogOut, Settings, User } from "lucide-react"; // アイコンを追加
 import { useState } from "react";
+import { Link, useNavigate } from "react-router";
 
 const Header = () => {
 	const [modalOpen, setModalOpen] = useState(false);
-
+	const { user } = useAuthStore();
+	const navigate = useNavigate();
 	const closeModal = () => {
 		setModalOpen(false);
+	};
+	const handleLogout = async () => {
+		try {
+			await signOut(auth);
+			console.log("ログアウト成功なのだ！🍵");
+		} catch (error) {
+			console.error("ログアウトに失敗したのだ...😭", error);
+		}
 	};
 
 	return (
 		<header className="bg-white shadow z-10">
 			<div className="container mx-auto px-4 py-4 flex items-center justify-between">
-				<h1 className="font-bold text-xl text-gray-800">Logo</h1>
+				<h1 className="font-bold text-xl text-gray-800">
+					<Link to="/">Logo</Link>
+				</h1>
 				<div className="flex ">
 					<Button
 						variant={"default"}
@@ -21,10 +44,58 @@ const Header = () => {
 					>
 						投稿
 					</Button>
-					<Avatar className="shadow">
-						<AvatarImage alt="icon-url" />
-						<AvatarFallback>CN</AvatarFallback>
-					</Avatar>
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							<Avatar className="cursor-pointer shadow hover:opacity-80">
+								<AvatarImage
+									src={user?.photoURL || ""}
+									alt="プロフィール画像"
+								/>
+								<AvatarFallback>{user?.displayName?.[0] || "U"}</AvatarFallback>
+							</Avatar>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent className="w-48" align="end">
+							<DropdownMenuItem onClick={() => {}}>
+								<User className="mr-2 h-4 w-4" />
+								マイページ
+							</DropdownMenuItem>
+							<DropdownMenuItem
+								onClick={() => {
+									navigate("/dashboard");
+								}}
+							>
+								<FileText className="mr-2 h-4 w-4" />
+								記事一覧
+							</DropdownMenuItem>
+							<DropdownMenuItem onClick={() => {}}>
+								<Settings className="mr-2 h-4 w-4" />
+								設定
+							</DropdownMenuItem>
+							<DropdownMenuSeparator />
+
+							{user ? (
+								<DropdownMenuItem
+									className="text-red-600 focus:text-red-600"
+									onClick={() => {
+										handleLogout();
+									}}
+								>
+									<LogOut className="mr-2 h-4 w-4" />
+									ログアウト
+								</DropdownMenuItem>
+							) : (
+								<DropdownMenuItem
+									className="text-red-600 focus:text-red-600"
+									onClick={() => {
+										navigate("/login");
+									}}
+								>
+									<LogOut className="mr-2 h-4 w-4" />
+									ログイン
+								</DropdownMenuItem>
+							)}
+						</DropdownMenuContent>
+					</DropdownMenu>
 				</div>
 			</div>
 			{modalOpen && (

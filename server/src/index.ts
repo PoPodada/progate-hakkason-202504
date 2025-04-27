@@ -2,6 +2,10 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { db } from "./firebase";
+import http from 'http';
+import { handleWebSocketConnection } from "./controller/websocket";
+const WebSocket = require("ws");
+
 
 // 環境変数を読み込むのだ
 dotenv.config();
@@ -52,8 +56,12 @@ app.get("/api/articles", async (req, res) => {
   }
 });
 
-// サーバーを起動するのだ
-app.listen(port, () => {
+// WebSocket接続の処理
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+wss.on("connection", handleWebSocketConnection);
+
+server.listen(port, () => {
   console.log(`サーバーが起動したのだ！ポート: ${port} 🍵`);
   testFirebaseConnection();
 });
