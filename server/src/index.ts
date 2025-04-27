@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { db } from "./firebase";
 import http, { get } from 'http';
 import { handleWebSocketConnection } from "./controller/websocket";
-import { createArticle, getAllArticles, getArticleById } from "./controller/articles";
+import { createArticle, getAllArticles, getArticleById, updateArticle } from "./controller/articles";
 import { create } from "domain";
 import { getAllUsers } from "./controller/user";
 const WebSocket = require("ws");
@@ -43,6 +43,7 @@ app.get("/", (req, res) => {
 app.get("/article", getAllArticles);    
 app.get("/article/:id", getArticleById);
 app.post("/article/create", createArticle);
+app.post("/article/update", updateArticle);
 
 
 app.get("/users", getAllUsers);
