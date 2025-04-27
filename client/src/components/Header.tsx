@@ -124,6 +124,7 @@ const Header = () => {
 						style={{ boxShadow: "0 4px 20px rgba(255,255,255,0.5" }}
 						onClick={(e) => {
 							e.stopPropagation();
+
 							console.log("プロジェクト作成画面");
 						}}
 					>

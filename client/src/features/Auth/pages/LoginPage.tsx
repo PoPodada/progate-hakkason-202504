@@ -73,8 +73,8 @@ function Login() {
 			const result = await signInWithPopup(auth, provider);
 
 			// GitHubの認証情報を取得するのだ
-			const credential = GithubAuthProvider.credentialFromResult(result);
-			const token = credential?.accessToken;
+			// const credential = GithubAuthProvider.credentialFromResult(result);
+			// const token = credential?.accessToken;
 
 			console.log("GitHub認証成功なのだ！", result.user);
 
