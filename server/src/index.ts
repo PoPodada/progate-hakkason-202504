@@ -32,6 +32,26 @@ app.get("/", (req, res) => {
   res.json({ message: "ずんだもんのAPI サーバーなのだ！🍡" });
 });
 
+// 記事一覧を取得するエンドポイントなのだ！
+app.get("/api/articles", async (req, res) => {
+  try {
+    const articlesSnapshot = await db.collection("articles").get();
+    const articles: Array<{id: string; [key: string]: any}> = [];
+    
+    articlesSnapshot.forEach((doc) => {
+      articles.push({
+        id: doc.id,
+        ...doc.data()
+      });
+    });
+    
+    res.json(articles);
+  } catch (error) {
+    console.error("記事データの取得に失敗したのだ...😭", error);
+    res.status(500).json({ error: "記事データの取得に失敗したのだ" });
+  }
+});
+
 // サーバーを起動するのだ
 app.listen(port, () => {
   console.log(`サーバーが起動したのだ！ポート: ${port} 🍵`);
