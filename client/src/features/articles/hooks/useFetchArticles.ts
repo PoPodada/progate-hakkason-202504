@@ -8,9 +8,9 @@ const API_BASE_URL =
 export interface Articles {
 	id: string;
 	title: string;
-	label: string[]; // 配列になったのだ！
-	emoji: string; // 絵文字フィールドを追加したのだ🚀
-	author: string; // author がシンプルな文字列になったのだ
+	label: string[];
+	emoji: string;
+	author: string;
 }
 
 export const useFetchArticles = () => {
