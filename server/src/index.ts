@@ -2,8 +2,11 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { db } from "./firebase";
-import http from 'http';
+import http, { get } from 'http';
 import { handleWebSocketConnection } from "./controller/websocket";
+import { createArticle, getAllArticles, getArticleById } from "./controller/articles";
+import { create } from "domain";
+import { getAllUsers } from "./controller/user";
 const WebSocket = require("ws");
 
 
@@ -16,6 +19,7 @@ const port = process.env.PORT || 3000;
 // ミドルウェアを設定するのだ
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Firebase接続テスト関数なのだ！
 const testFirebaseConnection = async () => {
@@ -35,6 +39,13 @@ const testFirebaseConnection = async () => {
 app.get("/", (req, res) => {
   res.json({ message: "ずんだもんのAPI サーバーなのだ！🍡" });
 });
+
+app.get("/article", getAllArticles);    
+app.get("/article/:id", getArticleById);
+app.post("/article/create", createArticle);
+
+
+app.get("/users", getAllUsers);
 
 // WebSocket接続の処理
 const server = http.createServer(app);

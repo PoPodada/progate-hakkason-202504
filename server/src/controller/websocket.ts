@@ -53,7 +53,4 @@ export const handleWebSocketConnection = (ws: WebSocket, req: { url: string }) =
       }
     }
   });
-
-
 };
-
