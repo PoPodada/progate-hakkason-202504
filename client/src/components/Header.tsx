@@ -111,7 +111,7 @@ const Header = () => {
 					<Button
 						className="font-black px-4 py-2 text-black bg-white rounded-lg hover:bg-gray-400 transition w-[240px] h-[280px]  z-20"
 						style={{ boxShadow: "0 4px 20px rgba(255,255,255,0.5" }}
-						onClick={(e) => {
+						onClick={() => {
 							console.log("プロジェクト作成画面");
 						}}
 					>

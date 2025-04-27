@@ -92,8 +92,8 @@ function Register() {
 			const result = await signInWithPopup(auth, provider);
 
 			// GitHubの認証情報を取得するのだ
-			const credential = GithubAuthProvider.credentialFromResult(result);
-			const token = credential?.accessToken;
+			// const credential = GithubAuthProvider.credentialFromResult(result);
+			// const token = credential?.accessToken;
 
 			// Firestoreにユーザー情報を保存するのだ🍡
 			await setDoc(doc(db, "users", result.user.uid), {
