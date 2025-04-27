@@ -60,7 +60,7 @@ const fetchProjects = async (): Promise<Project[]> => {
 const Dashboard = () => {
 	const [projects, setProjects] = useState<Project[]>([]);
 	const [loading, setLoading] = useState(true);
-    const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const loadProjects = async () => {
@@ -125,9 +125,9 @@ const Dashboard = () => {
 										variant="ghost"
 										size="icon"
 										className="border w-20 mr-4"
-                                        onClick={() => {
-                                            navigate(`/projects/${project.id}/edit`);
-                                        }}
+										onClick={() => {
+											navigate(`/projects/${project.id}/edit`);
+										}}
 									>
 										{/* <Edit className="h-4 w-4" /> */}
 										編集

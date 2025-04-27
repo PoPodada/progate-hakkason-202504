@@ -8,11 +8,11 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { auth } from "@/firebase";
+import { signOut } from "firebase/auth";
 import { FileText, LogOut, Settings, User } from "lucide-react"; // アイコンを追加
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { signOut } from "firebase/auth";
-import { auth } from "@/firebase";
 
 const Header = () => {
 	const [modalOpen, setModalOpen] = useState(false);
@@ -22,13 +22,13 @@ const Header = () => {
 		setModalOpen(false);
 	};
 	const handleLogout = async () => {
-			try {
-				await signOut(auth);
-				console.log("ログアウト成功なのだ！🍵");
-			} catch (error) {
-				console.error("ログアウトに失敗したのだ...😭", error);
-			}
-		};
+		try {
+			await signOut(auth);
+			console.log("ログアウト成功なのだ！🍵");
+		} catch (error) {
+			console.error("ログアウトに失敗したのだ...😭", error);
+		}
+	};
 
 	return (
 		<header className="bg-white shadow z-10">
@@ -77,7 +77,7 @@ const Header = () => {
 								<DropdownMenuItem
 									className="text-red-600 focus:text-red-600"
 									onClick={() => {
-										handleLogout()
+										handleLogout();
 									}}
 								>
 									<LogOut className="mr-2 h-4 w-4" />

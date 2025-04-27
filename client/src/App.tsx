@@ -28,8 +28,6 @@ function App() {
 	const { setUser, setLoading, user, loading } = useAuthStore();
 	console.log("user", user?.displayName);
 
-	
-
 	// Firebase接続テスト関数をuseCallbackでメモ化するのだ！
 	const testFirebaseConnection = useCallback(async () => {
 		try {
