@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import Dashboard from "@/features/Dashboard/Dashboard.tsx";
 import { BrowserRouter, Route, Routes } from "react-router";
 import App from "./App.tsx";
 import CommonLayout from "./components/CommonLayout.tsx";
@@ -20,8 +21,9 @@ createRoot(rootElement).render(
 					<Route index element={<App />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/signup" element={<Register />} />
-					<Route path="projects/:projectId/edit" element={<Edit />} />
-					<Route path="projects/:projectId" element={<ArticleDetail />} />
+					<Route path="/projects/:projectId/edit" element={<Edit />} />
+					<Route path="/projects/:projectId" element={<ArticleDetail />} />
+					<Route path="/dashboard" element={<Dashboard />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
