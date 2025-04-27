@@ -46,7 +46,7 @@ const TiptapEditor = () => {
 	useEffect(() => {
 		if (!projectId) return;
 		const newProvider = new WebsocketProvider(
-			"ws://localhost:3000",
+			import.meta.env.VITE_WS_URL||"ws://localhost:3000",
 			projectId, //roomname
 			ydoc,
 		);

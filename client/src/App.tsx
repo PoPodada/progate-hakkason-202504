@@ -1,8 +1,7 @@
 import { type User, onAuthStateChanged } from "firebase/auth";
 
 import { collection, getDocs } from "firebase/firestore";
-import { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router";
+import { useCallback, useEffect } from "react";
 import { create } from "zustand";
 import Articles from "./features/articles/pages/ArticlesPage";
 import { auth, db } from "./firebase";
@@ -25,7 +24,7 @@ function App() {
 	// 認証状態を保持するための状態変数なのだ！
 	// const [user, setUser] = useState<User | null>(null);
 	// const [loading, setLoading] = useState(true);
-	const { setUser, setLoading, user, loading } = useAuthStore();
+	const { setUser, setLoading, user } = useAuthStore();
 	console.log("user", user?.displayName);
 
 	// Firebase接続テスト関数をuseCallbackでメモ化するのだ！
