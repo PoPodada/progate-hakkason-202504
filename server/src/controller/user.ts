@@ -1,8 +1,8 @@
 import { db } from "../firebase";
-import { getDocumentState } from "./websocket";
+// import { getDocumentState } from "./websocket";
 
 export const getAllUsers = async (req: any, res: any) => {
-    console.log(getDocumentState("test-document"));
+    // console.log(getDocumentState("test-document"));
     try {
         const snapshot = await db.collection("users").get();
         const users: any[] = [];
