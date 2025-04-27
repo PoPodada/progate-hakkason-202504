@@ -104,7 +104,7 @@ const Header = () => {
 		<header className="bg-white shadow z-10">
 			<div className="container mx-auto px-4 py-4 flex items-center justify-between">
 				<h1 className="font-bold text-xl text-gray-800">
-					<Link to="/">Logo</Link>
+					<Link to="/">ネオTopa'z</Link>
 				</h1>
 				{renderAuthButtons()}
 			</div>
